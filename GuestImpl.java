@@ -1,6 +1,7 @@
 package Hospital;
 
 import java.sql.Connection;
+import java.util.Scanner;
 
 public class GuestImpl implements GuestDao {
 
@@ -13,7 +14,7 @@ public class GuestImpl implements GuestDao {
 	
 
 		
-
+		Scanner sc = new Scanner();
 		HospitalInsert hospitalinsert=new HospitalInsert();
 		
 	//	System.out.println(d.getId()+d.getName()+d.getAge()+d.getSpec()+d.getGender());
@@ -32,6 +33,19 @@ public class GuestImpl implements GuestDao {
 			if(f1==1 && f2==1)
 			{
 				con.commit();
+				System.out.println("Login with newly created User Id and Password");
+				System.out.println("Enter Id: ");
+				String usrname=sc.next().toLowerCase();
+				System.out.println("Enter password: ");
+				String password=sc.next();
+				if(login.userLogin(usrname,password))
+				{
+					UserOps.useroperations();
+				}else
+				{
+					e.inValidDetails();
+				}
+
 			}
 			else
 				con.rollback();
